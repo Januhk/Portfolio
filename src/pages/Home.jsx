@@ -12,7 +12,7 @@ import MySQL from "../images/sql.png";
 import Kave from "../images/pos.png";
 import Cplus from "../images/C++.png";
 import vb from "../images/download.png";
-import js from "../images/javascript.png";
+import js from "../images/Javascript.png";
 import node from "../images/Node.js.png";
 import ex from "../images/Express.png";
 import tail from "../images/Tailwind CSS.png";
