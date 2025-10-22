@@ -303,7 +303,7 @@ useEffect(() => {
                   <h2 className="text-3xl font-semibold text-white">
                     {proj.title}
                   </h2>
-                  <p className="text-white text-[15px] md:text-[14px] p-2  mb-2">
+                  <p className="text-white text-[15px] md:text-[12px] lg:text-[10px]  ">
                     {proj.desc}
                   </p>
 
