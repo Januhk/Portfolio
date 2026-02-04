@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import Photo from "../images/me.jpg";
 import { FaMapMarkerAlt, FaLinkedin } from "react-icons/fa";
 import { SiGithub } from "react-icons/si";
-import { FaEye, FaEnvelope,FaPhoneSquareAlt } from "react-icons/fa";
+import { FaEye, FaEnvelope, FaPhoneSquareAlt } from "react-icons/fa";
 import CodeRain from "../components/Stars";
-import Tilt from 'react-parallax-tilt';
+import Tilt from "react-parallax-tilt";
 import { useState, useEffect } from "react";
 import Dash from "../images/Dash.jpg";
 import C from "../images/1st.png";
@@ -32,12 +32,16 @@ const staggerContainer = {
 const Home = () => {
   const contacts = [
     {
-      icon: <FaEnvelope className="text-white text-6xl sm:text-6xl md:text-6xl lg:text-8xl p-2" />,
+      icon: (
+        <FaEnvelope className="text-white text-6xl sm:text-6xl md:text-6xl lg:text-8xl p-2" />
+      ),
       title: "Email",
       info: "johnvincentkhu1@gmail.com",
     },
     {
-      icon: <FaPhoneSquareAlt className="text-white text-6xl sm:text-6xl md:text-6xl lg:text-8xl p-2" />,
+      icon: (
+        <FaPhoneSquareAlt className="text-white text-6xl sm:text-6xl md:text-6xl lg:text-8xl p-2" />
+      ),
       title: "Phone",
       info: "+63 9691137273",
     },
@@ -56,29 +60,28 @@ const Home = () => {
     { id: 12, title: "Slack", image: Slack },
   ];
   const [scrollDistance, setScrollDistance] = useState(0);
-const [scrollDuration, setScrollDuration] = useState(20);
-let containerRef = null;
-let contentRef = null;
+  const [scrollDuration, setScrollDuration] = useState(20);
+  let containerRef = null;
+  let contentRef = null;
 
-useEffect(() => {
-  const calculateScroll = () => {
-    if (contentRef && containerRef) {
-      const containerWidth = containerRef.offsetWidth;
-      const contentWidth = contentRef.scrollWidth / 2; 
-      const distance = contentWidth - containerWidth;
-      setScrollDistance(-distance);
+  useEffect(() => {
+    const calculateScroll = () => {
+      if (contentRef && containerRef) {
+        const containerWidth = containerRef.offsetWidth;
+        const contentWidth = contentRef.scrollWidth / 2;
+        const distance = contentWidth - containerWidth;
+        setScrollDistance(-distance);
 
-      
-      const speed = 100; 
-      const duration = distance / speed;
-      setScrollDuration(duration);
-    }
-  };
+        const speed = 100;
+        const duration = distance / speed;
+        setScrollDuration(duration);
+      }
+    };
 
-  calculateScroll();
-  window.addEventListener("resize", calculateScroll);
-  return () => window.removeEventListener("resize", calculateScroll);
-}, [cards]);
+    calculateScroll();
+    window.addEventListener("resize", calculateScroll);
+    return () => window.removeEventListener("resize", calculateScroll);
+  }, [cards]);
 
   return (
     <div className="relative flex flex-col w-full items-center justify-center p-4 overflow-hidden min-h-screen ">
@@ -249,24 +252,26 @@ useEffect(() => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full flex flex-col items-center m-4 font-poppins"
+        className="w-full flex flex-col items-center py-16 font-poppins "
       >
-        <h2 className="text-5xl font-semibold text-white pb-5">
+        {/* Section Title */}
+        <h2 className="text-5xl font-bold text-white pb-10 text-center">
           Projects & Contributions
         </h2>
 
-        <div className="w-full flex flex-wrap md:flex-col lg:flex-nowrap justify-between gap-6 p-2">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full px-4 md:px-16">
           {[
             {
               image: Kave,
               title: "Kave Pharmacy",
-              desc: "Contributed to the development of a full-stack pharmacy POS system built with the MERN stack, focusing on implementing core features such as inventory tracking, user management, and responsive layouts for efficient operations.",
+              desc: "Contributed to a full-stack pharmacy POS system (MERN), focusing on inventory tracking, user management, and responsive layouts for Kave Guilds Pharmacy",
               stack: [
                 "MongoDB",
                 "Express",
                 "React",
                 "Node.js",
-                "Sqlite",
+                "SQLite",
                 "TailwindCSS",
               ],
               link: "https://kavepharmacy.netlify.app/",
@@ -274,49 +279,55 @@ useEffect(() => {
             {
               image: Dash,
               title: "Vehicle Gatepass/Parking System",
-              desc: "A thesis project developed at Notre Dame of Dadiangas University, General Santos City. a real-time vehicle gate pass system that integrates RFID and Automatic License Plate Recognition (ALPR) and with WebSocket technology for real-time data updates.",
-              stack: ["C#", "MySQL", "Websocket"],
+              desc: "Developed a real-time vehicle gate pass management system that uses RFID and ALPR to automatically identify vehicles and grant access, with WebSocket enabling instant updates for security personnel and administrators.",
+              stack: ["C#", "MySQL", "WebSocket"],
               link: "https://github.com/Januhk/Vehicle-Gatepass-System",
             },
           ].map((proj, i) => (
             <motion.div
               key={i}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.3 }}
-              className="w-full md:w-[65%] md:mx-auto"
+              className="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 flex flex-col"
             >
-              <div className="relative w-full aspect-[20/9] overflow-hidden rounded-xl shadow-lg group border border-white">
-                <a
-                  href={proj.link}
-                  target="_blank"
-                  className="bg-gray-200 font-poppins font-semibold absolute top-2  right-3 z-20 px-1 py-1 md:px-6 md:py-2 rounded-xl "
-                  title="Preview"
-                >
-                 Preview
-                </a>
+              {/* Image */}
+              <div className="relative w-full h-64 md:h-48 lg:h-56 overflow-hidden group">
                 <img
                   src={proj.image}
                   alt={proj.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute bottom-0 left-0 w-full h-[30%] bg-black/70 translate-y-full group-hover:translate-y-0 transition-transform duration-500 p-3 ">
-                  <h2 className="text-3xl font-semibold text-white">
+                <a
+                  href={proj.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute top-3 right-3 bg-black text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-white hover:text-black transition"
+                >
+                  Preview
+                </a>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-2">
                     {proj.title}
-                  </h2>
-                  <p className="text-white text-[15px] md:text-[12px] lg:text-[10px]  ">
+                  </h3>
+                  <p className="text-gray-300 text-sm md:text-base">
                     {proj.desc}
                   </p>
+                </div>
 
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {proj.stack.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="bg-white/20 text-white text-xs font-semibold px-3  rounded-full border border-white/30"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {proj.stack.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="bg-gray-700 text-gray-200 text-xs font-medium px-3 py-1 rounded-full border border-gray-600"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             </motion.div>
@@ -370,33 +381,41 @@ useEffect(() => {
           </motion.div>
         </div>
       </motion.section>
-
+{/* Contact SECTION */}
       <motion.section
         id="Contacts"
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full flex flex-col items-center justify-center p-4 overflow-hidden  rounded-2xl"
+        className="w-full max-w-5xl mx-auto p-8 bg-black text-white rounded-2xl flex flex-col items-center"
       >
-        <h3 className="text-6xl font-semibold text-white pb-2 text-center text-nowrap ">
+        <h3 className="text-4xl md:text-5xl font-bold text-center mb-3">
           Contact Me
         </h3>
-        <p className="text-3x1 md:text-sm lg:text-xl text-center lg:text-left  text-gray-500">
+
+        <p className="text-gray-300 text-center max-w-2xl mb-10">
           Whether you have a question, a project idea, or just want to connect,
-          I’d be happy to hear from you
+          I’d be happy to hear from you.
         </p>
-        <div className="w-full  flex flex-col md:flex-row lg:flex-row items-center justify-center gap-x-6 gap-y-4 p-5 m-5">
-          {contacts.map((contact, index) => (
+
+      
+        <div className="w-full flex flex-col md:flex-row gap-6 justify-center">
+          {contacts.map((contact, idx) => (
             <div
-              key={index}
-              className="w-full lg:w-1/3 bg-transparent rounded-2xl text-center flex flex-col items-center justify-center border border-white hover:shadow-lg shadow-white transition-all duration-300"
+              key={idx}
+              className="flex-1 bg-black border border-white rounded-2xl p-6 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300"
             >
-              {contact.icon}
-              <span className="font-semibold font-poppins text-sm p-2 text-white">
+              {/* Icon */}
+              <div className="text-4xl mb-4">{contact.icon}</div>
+
+              {/* Title */}
+              <span className="font-semibold text-white mb-2">
                 {contact.title}
               </span>
-              <span className="font-semibold font-poppins text-sm p-2 text-white">
+
+              {/* Info */}
+              <span className="text-gray-300 text-lg break-words">
                 {contact.info}
               </span>
             </div>
